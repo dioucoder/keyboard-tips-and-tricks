@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@500;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    background-color: #f0f8ff;
+    color: #111;
+    padding: 8px;
+}
+
+svg {
+    fill: #fff;
+}
+
+.keyboard_box {
+    display: grid;
+    grid-template-columns: repeat(19, 1fr);
+    gap: 15px 8px;
+    background-color: #111;
+    color: #f0f8ff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.key {
+    position: relative;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #222;
+    color: #f0f8ff;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    justify-content: center;
+}
+
+.key:active:not(.subgrid) {
+    background: #444;
+    box-shadow: inset 0px 5px 0px #111,
+        inset 0px -5px 0px #000;
+}
+
+.key_text {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.abs {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    right: 8px;
+    bottom: 8px;
+}
+
+.subgrid {
+    display: subgrid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row: 6 / span 1;
+    grid-column: 13 / span 4;
+    gap: 5px;
+    pointer-events: none;
+}
+
+.subgrid .key {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+body :is(.key-enter-first) {
+    grid-column: 14 / span 2;
+}
+
+.key-backspace {
+    grid-column: 13 / span 3;
+}
+
+body :is(.key-tab, .key-capslock, .key-shift-first) {
+    grid-column: 1 / span 2;
+}
+
+body :is(.key-plus, .key-enter-second) {
+    grid-column: 19 / -1;
+    grid-row: 5 / span 2;
+}
+
+.key-plus {
+    grid-row: 3 / span 2 !important;
+}
+
+.key-shift-first {
+    grid-column-end: span 2 !important;
+}
+
+.key-space {
+    grid-row: 6 / span 1;
+    grid-column: 5 / span 6;
+}
+
+.key-shift-second {
+    grid-column: 13 / span 3 !important;
+}
+
+.key-capslock::after {
+    position: absolute;
+    content: '';
+    width: 5px;
+    height: 5px;
+    background-color: #f0f8ff;
+    border-radius: 50%;
+    top: 10px;
+    right: 8px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.key-capslock.active::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.key-enter-first::before,
+.key-antislash::after {
+    position: absolute;
+    content: '';
+    width: 50%;
+    height: 12px;
+    background-color: inherit;
+    top: -6px;
+    right: 0;
+    border-top-right-radius: 5px;
+}
+
+.key-antislash::after {
+    top: initial;
+    bottom: -6px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: initial;
+}
+
+.key-enter-first {
+    border-top-right-radius: 0;
+}
+
+.key-antislash {
+    border-bottom-right-radius: 0;
+}
+
+.value-key-box {
+    position: fixed;
+    top: 1%;
+    right: 2%;
+    width: 100px;
+    height: 50px;
+    background-color: #0c0c0c;
+    color: #fcfcfc;
+    font-size: 16px;
+    font-weight: 200;
+    display: grid;
+    transform: scale(.5);
+    place-items: center;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.value-key-box.active {
+    visibility: visible;
+    opacity: 1;
+    transition: transform .1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(1);
+}
